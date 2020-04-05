@@ -4,7 +4,7 @@ function isWhiteSpaceOrEmpty(str) {
 
 function isEmailInvalid(str) {
     let email = /^[a-zA-Z_0-9\.]+@[a-zA-Z_0-9\.]+\.[a-zA-Z][a-zA-Z]+$/;
-    return !email.test(str)
+    return !email.test(str);
 }
 
 function checkStringAndFocus(obj, msg, fun) {
@@ -21,13 +21,17 @@ function checkStringAndFocus(obj, msg, fun) {
 }
 
 function validate(f) {
-    checkStringAndFocus(f.elements["f_imie"], "Wprowadź imię", isWhiteSpaceOrEmpty);
-    checkStringAndFocus(f.elements["f_nazwisko"], "Wprowadź nazwisko", isWhiteSpaceOrEmpty);
-    checkStringAndFocus(f.elements["f_kod"], "Wprowadź kod", isWhiteSpaceOrEmpty);
-    checkStringAndFocus(f.elements["f_ulica"], "Wprowadź ulicę", isWhiteSpaceOrEmpty);
-    checkStringAndFocus(f.elements["f_miasto"], "Wprowadź miasto", isWhiteSpaceOrEmpty);
-    checkStringAndFocus(f.elements["f_email"], "Wprowadź poprawny email", isEmailInvalid);
-    return false;
+	var fields = ["f_imie", "f_nazwisko", "f_kod", "f_ulica", "f_miasto"];
+	var prompts = ["Wprowadź imię", "Wprowadź nazwisko", "Wprowadź kod", "Wprowadź ulicę", "Wprowadź miasto"];
+	var flag = true;
+	
+	for(var i=0; i<fields.length; i++){
+		if(!checkStringAndFocus(f.elements[fields[i]], prompts[i], isWhiteSpaceOrEmpty))
+			flag = false;
+	}
+	if(!checkStringAndFocus(f.elements["f_email"], "Wprowadź poprawny email", isEmailInvalid))
+		flag = false;
+    return flag;
 }
 
 function showElement(e) {
