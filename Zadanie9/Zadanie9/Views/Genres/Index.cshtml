@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Zadanie9.Models.Genre>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@Html.Partial("_GenresList", Model)
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
